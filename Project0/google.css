@@ -1,0 +1,14 @@
+.links {
+    text-align: end;
+    margin: 10px;
+}
+
+.search {
+    text-align: center;
+}
+
+.searchbar {
+    margin: 10px;
+    width: 300px;
+    border-radius: 5px;
+}
