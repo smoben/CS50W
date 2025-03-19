@@ -1,0 +1,20 @@
+{% extends "encyclopedia/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block body %}
+    {% if titles %}
+    <h1>{{ page_title }}</h1>
+    {{ titles }}
+    {% else %}
+    <h2>Search results:</h2>
+        <ul>
+            {% for entry in entry_list %}
+                <li><a href="{% url 'entry_page' title=entry %}">{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
