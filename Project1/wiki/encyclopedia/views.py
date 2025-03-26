@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django import forms
-from django.urls import reverse
-from django.http import HttpResponseRedirect
 
 from . import util
 
@@ -37,8 +35,8 @@ def search(request):
             else:
                 entry_list = []
                 for i in util.list_entries():
-                        if search_.capitalize() in i.capitalize():
-                            entry_list.append(i)
+                    if search_.capitalize() in i.capitalize():
+                        entry_list.append(i)
                 return render(request, "encyclopedia/search.html", {
                     "form": form,
                     "search_": search_,
