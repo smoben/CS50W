@@ -17,7 +17,7 @@ def index(request):
 
 def entry_page(request, title):
     return render(request, "encyclopedia/entry_page.html", {
-        "titles": util.get_entry(title),
+        "content": util.get_entry(title),
         "page_title": title,
         "form": SearchForm()
     })
@@ -56,6 +56,11 @@ def new_page(request):
     if request.method == "POST":
         title = request.POST['title']
         content = request.POST['content']
+        if util.get_entry(title) is not None:
+            return render(request, "encyclopedia/error.html", {
+                "entries": util.list_entries(),
+                "form": SearchForm()
+            })
         if len(title)>1 and len(content)>1:
             util.save_entry(title, content)
             return render(request, "encyclopedia/new_page.html", {
@@ -73,3 +78,27 @@ def new_page(request):
             "form": SearchForm()
         })
     
+def edit_page(request, title):
+    if request.method == "POST":
+        content = request.POST['content']
+        if len(content)>1:
+            util.save_entry(title, content)
+            return render(request, "encyclopedia/entry_page.html", {
+                "content": util.get_entry(title),
+                "page_title": title,
+                "entries": util.list_entries(),
+                "form": SearchForm()
+            })
+        else:
+            return render(request, "encyclopedia/edit_page.html", {
+                "entries": util.list_entries(),
+                "form": SearchForm()
+            })
+    else:
+        content = util.get_entry(title)
+        return render(request, "encyclopedia/edit_page.html", {
+            "content": content,
+            "title": title,
+            "entries": util.list_entries(),
+            "form": SearchForm()
+        })

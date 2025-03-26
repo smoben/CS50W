@@ -5,9 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    {% if titles %}
+    {% if content %}
     <h1>{{ page_title }}</h1>
-    {{ titles }}
+    {{ content }}
+    <br>
+    <a href="{% url 'edit_page' title=page_title %}">Edit</a></li>
     {% else %}
         <h1>Error</h1>
         <h3>Requested page was not found</h3>
