@@ -2,6 +2,8 @@
 
 {% block body %}
     <h2>Active Listings</h2>
-
-    TODO
+    <a href="{% url 'listing' %}">Link</a>
+    {% for auction in auctions %}
+        <li>{{ auction.id }}: <img src="{{ auction.pic_url }}" alt="picture">{{ auction.title }}, Description: {{ auction.description }}, Current Price: {{ auction.bid }}</li>
+    {% endfor %}
 {% endblock %}
